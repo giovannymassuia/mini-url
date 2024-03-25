@@ -3,6 +3,10 @@ package main
 import (
 	"net/http"
 
+	"github.com/rs/cors"
+	httpSwagger "github.com/swaggo/http-swagger"
+
+	_ "github.com/giovannymassuia/mini-url/docs"
 	"github.com/giovannymassuia/mini-url/internal/handlers"
 	"github.com/giovannymassuia/mini-url/internal/services"
 )
@@ -13,6 +17,16 @@ type Link struct {
 	ShortUrl string `json:"short_url"`
 }
 
+// @title Mini URL API
+// @version 1.0
+// @description This is a simple API to create short links
+
+// @contact.name Giovanny Massuia
+// @contact.url giovannymassuia.io
+
+// @host http://localhost:8080
+// @BasePath /
+// @servers http://localhost:8080
 func main() {
 	mux := http.NewServeMux()
 
@@ -23,5 +37,11 @@ func main() {
 	mux.HandleFunc("GET /{shortLink}", handler.GetLongLink)
 	mux.HandleFunc("POST /api/link", handler.CreateShortLink)
 
-	http.ListenAndServe(":8080", mux)
+	// swagger docs
+	mux.HandleFunc("/swagger/", httpSwagger.WrapHandler)
+
+	// cors
+	corsHandler := cors.Default().Handler(mux)
+
+	http.ListenAndServe(":8080", corsHandler)
 }

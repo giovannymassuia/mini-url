@@ -1,0 +1,94 @@
+basePath: /
+definitions:
+  domain.Link:
+    properties:
+      id:
+        type: string
+      longUrl:
+        type: string
+      shortUrl:
+        type: string
+    type: object
+  dto.CrateShortLinkRequest:
+    properties:
+      long_url:
+        type: string
+    type: object
+  dto.CreateShortLinkResponse:
+    properties:
+      short_url:
+        type: string
+    type: object
+host: http://localhost:8080
+info:
+  contact:
+    name: Giovanny Massuia
+    url: giovannymassuia.io
+  description: This is a simple API to create short links
+  title: Mini URL API
+  version: "1.0"
+paths:
+  /{shortLink}:
+    get:
+      description: Get long link from short link
+      parameters:
+      - description: Short link
+        in: path
+        name: shortLink
+        required: true
+        type: string
+      produces:
+      - text/html
+      responses:
+        "301":
+          description: Redirect to long link
+          schema:
+            type: string
+        "404":
+          description: Link not found
+          schema:
+            type: string
+      summary: Get long link
+      tags:
+      - links
+  /api/link:
+    get:
+      description: Get all links
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Link'
+            type: array
+      summary: Get all links
+      tags:
+      - links
+    post:
+      consumes:
+      - application/json
+      description: Create short link from long link
+      parameters:
+      - description: Long URL
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CrateShortLinkRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          headers:
+            Location:
+              description: /{shortUrl}
+              type: string
+          schema:
+            $ref: '#/definitions/dto.CreateShortLinkResponse'
+      summary: Create short link
+      tags:
+      - links
+swagger: "2.0"
