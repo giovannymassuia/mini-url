@@ -17,6 +17,11 @@ const docTemplate = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
+    "servers": [
+        {
+            "url": "http://localhost:8080"
+        }
+    ],
     "paths": {
         "/api/link": {
             "get": {
