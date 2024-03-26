@@ -7,6 +7,18 @@ The shortened version is generated using just the id of the URL in the map.
 
 ## How to run
 
+Using Makefile:
+
+API:
+
+- `make run-api`
+
+Docs:
+
+- `make run-docs`
+
+or
+
 Go API:
 
 - `cd app`

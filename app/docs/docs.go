@@ -81,7 +81,7 @@ const docTemplate = `{
         },
         "/{shortLink}": {
             "get": {
-                "description": "Get long link from short link",
+                "description": "Get long link from short link. Redirect to long link.",
                 "produces": [
                     "text/html"
                 ],

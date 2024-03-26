@@ -30,7 +30,7 @@ info:
 paths:
   /{shortLink}:
     get:
-      description: Get long link from short link
+      description: Get long link from short link. Redirect to long link.
       parameters:
       - description: Short link
         in: path

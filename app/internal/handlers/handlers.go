@@ -20,7 +20,7 @@ func NewHandler(linkService services.LinkServiceInterface) *Handler {
 }
 
 // @Summary Get long link
-// @Description Get long link from short link
+// @Description Get long link from short link. Redirect to long link.
 // @Tags links
 // @Param shortLink path string true "Short link"
 // @Produce html
