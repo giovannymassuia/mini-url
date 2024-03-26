@@ -24,9 +24,9 @@ type Link struct {
 // @contact.name Giovanny Massuia
 // @contact.url giovannymassuia.io
 
-// @host http://localhost:8080
+// @host localhost:8080
 // @BasePath /
-// @servers http://localhost:8080
+// @servers.url http://localhost:8080
 func main() {
 	mux := http.NewServeMux()
 
@@ -38,7 +38,7 @@ func main() {
 	mux.HandleFunc("POST /api/link", handler.CreateShortLink)
 
 	// swagger docs
-	mux.HandleFunc("/swagger/", httpSwagger.WrapHandler)
+	mux.HandleFunc("/swagger/*", httpSwagger.WrapHandler)
 
 	// cors
 	corsHandler := cors.Default().Handler(mux)

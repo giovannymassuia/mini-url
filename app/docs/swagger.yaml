@@ -19,7 +19,7 @@ definitions:
       short_url:
         type: string
     type: object
-host: http://localhost:8080
+host: localhost:8080
 info:
   contact:
     name: Giovanny Massuia
